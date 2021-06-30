@@ -1,0 +1,126 @@
+:root {
+  --accent: 139, 0, 139;
+  --accent-color: rgb(var(--accent));
+}
+
+html {
+  font-family: Lato, sans-serif;
+  font-size: 20px;
+}
+
+::selection {
+  background-color: rgba(var(--accent), 0.6);
+}
+
+.card {
+  margin: 30px auto;
+  border-radius: 20px;
+  padding: 5px 5px;
+  width: 30em;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 5px 10px gray;
+}
+
+h1,
+h2 {
+  text-align: center;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+body {
+  background-color: LightSteelBlue;
+  /* margin: 0 auto;
+  
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px; */
+}
+
+label {
+  position: relative;
+  display: block;
+}
+
+label .tooltip {
+  visibility: hidden;
+  width: 30em;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+label:hover .tooltip {
+  visibility: visible;
+}
+
+input {
+  font-family: monospace;
+  float: right;
+  width: 20em;
+}
+
+button,
+input[type='submit'] {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+  border: none;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 5px;
+  box-shadow: 0 5px 10px gray;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+form {
+  /* min-width: 50%; */
+  margin: 30px auto;
+  border-radius: 20px;
+  padding: 5px 5px;
+  width: 30em;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 5px 10px gray;
+}
+
+@keyframes flash {
+  0% {
+    color: inherit;
+  }
+  50% {
+    color: red;
+  }
+  100% {
+    color: inherit;
+  }
+}
+
+h1:target {
+  animation-name: flash;
+  animation-duration: 1s;
+}
+
+h1:target ~ label {
+  animation-name: flash;
+  animation-duration: 1s;
+}
+
+a {
+  text-decoration: none;
+}

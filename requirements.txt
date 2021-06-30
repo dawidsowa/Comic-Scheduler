@@ -1,0 +1,4 @@
+flask
+feedgen
+gunicorn
+beautifulsoup4

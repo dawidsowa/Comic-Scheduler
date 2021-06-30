@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block title %} Examples {% endblock %} {% block
+content %}
+<div class="card">
+  <h2>Tips</h2>
+  For Tumblr webcomics
+  <code>.entry-content img:not(.avatar)</code> should work.
+</div>
+<div class="card">
+  <h2>Examples</h2>
+  <ul>
+    {% for title, params in examples.items() %}
+    <li>
+      <a
+        href="/?{{'slug' if params.target == 'comicrocket' else 'scheme'}}={{params.site}}{{'&title=' + title if params.target == 'numbered' else ''}}&query={{params.query}}#{{params.target}}"
+        >{{title}}</a
+      >
+    </li>
+    {% endfor %}
+  </ul>
+  {% endblock %}
+</div>

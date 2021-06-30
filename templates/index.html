@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% set base_form %} {% block form %}
+<label>
+  Start from
+  <div class="tooltip">Number of the comic page from which to start.</div>
+  <input type="number" min="1" name="start" value="1" />
+</label>
+<label>
+  Pages per day
+  <input type="number" min="1" max="10" name="per-day" value="1" />
+</label>
+<label>
+  Query selector <input type="text" name="query"
+  placeholder="Optional" value="{{args.get("query", default="") }}" />
+</label>
+<label>
+  Iframe
+  <div class="tooltip">
+    If selected the RSS entry will contain Iframe of the comic page.
+  </div>
+  <input type="checkbox" name="iframe" />
+</label>
+
+<input
+  id="date"
+  type="hidden"
+  name="date"
+  value="{{ date.strftime('%Y-%m-%d') }}"
+/>
+<input type="submit" value="Atom feed" />
+{% endblock %}{% endset %}
+
+{# {% include 'examples.html' %} #}
+{% block title %}
+Index
+{% endblock %}
+{% block content %}
+
+<form action="/numbered" method="GET" class="card">
+<h2 id="numbered">Numbered</h1>
+  <label >
+    Title
+    <div class="tooltip">
+      Will be used as a title of the RSS feed, as well as title of the
+      entries.
+    </div>
+    <input type="text" name="title" required value="{{
+    args.get("title", default="") }}"/>
+  </label>
+  <label>
+    Scheme
+    <div class="tooltip">
+      The URL of the comic page, with <code>{}</code> in place of page
+      number. <br />For example:<br />
+      <code>https://www.jspowerhour.com/comics/<b>262</b></code>
+      <code>https://www.jspowerhour.com/comics/{}</code>
+    </div>
+    <input type="url" pattern=".*\{\}.*" required name="scheme"
+    placeholder="https://example.org/comic/{}" value="{{
+    args.get("scheme", default="") }}" />
+  </label>
+  {{ base_form }}
+</form>
+
+<form action="/comicrocket" method="GET" class="card">
+<h2 id="comicrocket">Comic Rocket</h1>
+  <label>
+    Slug
+    <div class="tooltip">
+      Indentifier of comic on comic-rocket.com. For example:
+      <code
+        >https://www.comic-rocket.com/explore/<b>good-bear-comics</b>/</code
+      >
+    </div>
+    <input type="text" name="slug" required value="{{ args.get("slug",
+    default="") }}" placeholder="Required" />
+  </label>
+  {{ base_form }}
+</form>
+
+{% endblock %}

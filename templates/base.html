@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<title>{% block title %}{% endblock %} - WebComic Scheduler</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+<header class="card">
+  <h1>WebComic Scheduler</h1>
+
+  <a href="https://github.com/dawidsowa/Comic-Scheduler">
+    <button>GitHub</button></a
+  >
+  <a href="/examples"> <button>Examples</button></a>
+
+  {% block header %}{% endblock %}
+</header>
+{% block content %}{% endblock %}

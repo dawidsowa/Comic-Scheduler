@@ -1,0 +1,7 @@
+{
+  "name": "Comic Scheduler",
+  "description": "PLACEHOLDER",
+  "image": "heroku/python",
+  "repository": "https://github.com/dawidsowa/Comic-Scheduler",
+  "keywords": ["python", "flask"]
+}
