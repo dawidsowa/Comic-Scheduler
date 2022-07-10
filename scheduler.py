@@ -43,7 +43,7 @@ class Scheduler:
 
         current = start + (diff + 1) * self.pages - 1
 
-        oldest = current - (10 * self.pages if 10 * self.pages < 15 else 15)
+        oldest = current - (3 * self.pages)
         oldest = oldest if oldest > start else start
 
         self.range = range(oldest, current + 1)
