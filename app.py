@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 from datetime import datetime
-from scheduler import ComicRocketScheduler, NumberedScheduler, SlugError
+from scheduler import ComicRocketScheduler, NumberedScheduler, SlugError, FeedScheduler
 
 EXAMPLES = {
     "Junior Scientist Power Hour": {
@@ -42,6 +42,15 @@ def examples():
 def numbered():
     try:
         scheduler = NumberedScheduler(request.args)
+    except ValueError as err:
+        return str(err), 400
+
+    return scheduler.response()
+
+@app.route("/feed")
+def feed():
+    try:
+        scheduler = FeedScheduler(request.args)
     except ValueError as err:
         return str(err), 400
 

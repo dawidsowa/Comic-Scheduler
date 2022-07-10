@@ -5,6 +5,7 @@ from urllib.parse import urljoin, urlparse
 from datetime import datetime
 from flask import make_response, request
 from urllib.error import HTTPError
+import feedparser
 
 USER_AGENT = "Mozilla/5.0 (Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0"
 
@@ -42,11 +43,10 @@ class Scheduler:
 
         current = start + (diff + 1) * self.pages - 1
 
-        oldest = current - (10 * self.pages if 10 * self.pages < 20 else 20)
+        oldest = current - (10 * self.pages if 10 * self.pages < 15 else 15)
         oldest = oldest if oldest > start else start
 
         self.range = range(oldest, current + 1)
-        print(diff)
 
         for num in self.range:
             self.create_entry(num)
@@ -99,6 +99,34 @@ class NumberedScheduler(Scheduler):
         url = self.scheme.format(num)
 
         title = self.title + " #" + str(num)
+
+        super().create_entry(url, title)
+
+class FeedScheduler(Scheduler):
+    def __init__(self, args):
+        self.feed = FeedGenerator()
+
+        self.url = args.get("url")
+        self.iframe = args.get("iframe") == "on"
+        self.query = args.get("query")
+
+        parsed = feedparser.parse(self.url)
+
+        self.title = parsed.feed.title
+
+        self.feed.id(parsed.feed.link)
+        self.feed.link(href=parsed.feed.link)
+
+        for entry in parsed.entries[0:5]:
+            self.create_entry(entry)
+            
+
+        
+
+    def create_entry(self, entry):
+        url = entry.link
+
+        title = entry.title
 
         super().create_entry(url, title)
 

@@ -78,4 +78,21 @@ Index
   {{ base_form }}
 </form>
 
+
+<form action="/feed" method="GET" class="card">
+  <h2 id="feed">RSS based</h1>
+    <label>
+      URL
+      <div class="tooltip">
+        Indentifier of comic on comic-rocket.com. For example:
+        <code>https://www.comic-rocket.com/explore/<b>good-bear-comics</b>/</code>
+      </div>
+      <input type="url" name="url" required value="{{ args.get(" slug", default="" ) }}" placeholder="Required" />
+    </label>
+    <label>
+      Query selector <input type="text" name="query" placeholder="Optional" value="{{args.get(" query", default="" ) }}" />
+    </label>
+    <input type="submit" value="Atom feed" />
+</form>
+
 {% endblock %}
