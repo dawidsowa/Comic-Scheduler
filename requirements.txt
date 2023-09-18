@@ -1,5 +1,0 @@
-flask
-feedgen
-gunicorn
-beautifulsoup4
-feedparser

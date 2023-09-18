@@ -1,2 +1,7 @@
 __pycache__
 .venv
+poetry.lock
+*.py[cod]
+**/.task/checksum/*
+**/.directory
+**/.ipynb_checkpoints/*
